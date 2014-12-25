@@ -4,10 +4,14 @@
 		{
 			"follow_symlinks": true,
 			"path": "../io"
+		},
+		{
+			"follow_symlinks": true,
+			"path": "../3party"
 		}
 	],
 	"settings":
 	{
-	        "tab_size": 4
+		"tab_size": 4
 	}
 }
