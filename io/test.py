@@ -20,17 +20,21 @@ if test_create:
 
 if test_read:
 	print("Running read4x test")
-	darray = []
-	#ok = read_4xfile("eur.aud_12.23.2014", darray)  
-	ok = read_4xfile("gbp.jpy_12.23.2014", darray) 
-	if ok:
-		print("read_4xfile passed")
-		find10MinGain_4xdata(darray)
-		#print_4xarray(darray)
-		print(get_4xBinarySequence(darray))
 
-		purchase_4xdata(darray)
-		winLoss = score_4xdata(darray)
-		print("nwins= " + str(winLoss[0]) + " nLosses=" + str(winLoss[1]))
-	else:
-		print("read_4xfile failed")
+	fileList = ["eur.aud_12.23.2014", "eur.usd_12.23.2014", "gbp.jpy_12.23.2014", "gbp.usd_12.23.2014", "usd.cad_12.23.2014", "usd.jpy_12.23.2014"]
+	#fileList = ["eur.usd_12.23.2014"]
+
+	for fileName in fileList:
+		darray = []
+		ok = read_4xfile(fileName, darray)  
+		if ok:
+			find10MinGain_4xdata(darray)
+			#print_4xarray(darray)
+			#print(get_4xBinarySequence(darray))
+
+			numPurchase = purchase_4xdata(darray)
+			[win, los] = score_4xdata(darray)
+	
+			print(fileName + " numPurchase= " + str(numPurchase) + ": %wins=" + str(int(100* float(win)/float(win+los))) + " wins=" + str(win) + " losses=" + str(los))
+		else:
+			print("read_4xfile failed")
