@@ -15,23 +15,28 @@ import csv
 import datetime
 import time
 
+from FxEntry import FxEntry
+
 def read_4xfile(fileName, darray):
     print("reading: " + "../Data/" + fileName + ".csv")
 
-    rowNumber = 0
+    lineNumber = 0
     with open("../Data/" + fileName + ".csv", 'rb') as csvfile:
 		fxreader = csv.reader(csvfile, delimiter=',', quotechar='|')
-		for fileRow in fxreader:
-			if(rowNumber > 0):
-				dateString = fileRow[0]
-				dt = datetime.datetime.strptime(dateString, "%m/%d/%Y %H:%M:%S %p")
-				
-				timestamp = time.mktime(dt.timetuple())
+		for fileLine in fxreader:
+			if(lineNumber > 0):
+				entry = FxEntry()
+				entry.dateString = fileLine[0]
 
-				dataRow = [
-					int(timestamp), float(fileRow[1]), float(fileRow[2]), float(fileRow[3]), float(fileRow[4]), None
-				]
-				darray.append(dataRow)
-			rowNumber += 1
+				dt = datetime.datetime.strptime(entry.dateString, "%m/%d/%Y %H:%M:%S %p")	
+				entry.timeStamp = int(time.mktime(dt.timetuple()))
+
+				entry.open = float(fileLine[1])
+				entry.high = float(fileLine[2])
+				entry.low = float(fileLine[3])
+				entry.close = float(fileLine[4])
+
+				darray.append(entry)
+			lineNumber += 1
 	
     return True
