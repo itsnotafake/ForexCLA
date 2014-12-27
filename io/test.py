@@ -4,6 +4,7 @@ from score4x import get_4xBinarySequence
 from score4x import purchase_4xdata
 from score4x import score_4xdata
 from create4x import create_4xdata
+from createHistogram4x import createHistogram
 
 
 def print_4xarray(darray):
@@ -31,6 +32,7 @@ if test_read:
 			find10MinGain_4xdata(darray)
 			#print_4xarray(darray)
 			#print(get_4xBinarySequence(darray))
+			createHistogram(get_4xBinarySequence(darray))
 
 			numPurchase = purchase_4xdata(darray)
 			[win, los] = score_4xdata(darray)
