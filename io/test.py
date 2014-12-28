@@ -1,8 +1,11 @@
 from read4x import read_4xfile
 from score4x import find10MinGain_4xdata
+from score4x import find6MinGain_4xdata
 from score4x import get_4xBinarySequence
-from score4x import purchase_4xdata
-from score4x import score_4xdata
+from score4x import purchase1_4xdata
+from score4x import purchase2_4xdata
+from score4x import score1_4xdata
+from score4x import score2_4xdata
 from create4x import create_4xdata
 from createHistogram4x import createHistogram
 
@@ -30,13 +33,19 @@ if test_read:
 		ok = read_4xfile(fileName, darray)  
 		if ok:
 			find10MinGain_4xdata(darray)
+			find6MinGain_4xdata(darray)
 			#print_4xarray(darray)
 			#print(get_4xBinarySequence(darray))
-			createHistogram(get_4xBinarySequence(darray))
+			histogram = createHistogram(get_4xBinarySequence(darray))
 
-			numPurchase = purchase_4xdata(darray)
-			[win, los] = score_4xdata(darray)
+			numPurchase = purchase1_4xdata(darray)
+			numPurchase2 = purchase2_4xdata(darray)
+
+			[win, los] = score1_4xdata(darray)
+			[win2, los2] = score2_4xdata(darray)
 	
 			print(fileName + " numPurchase= " + str(numPurchase) + ": %wins=" + str(int(100* float(win)/float(win+los))) + " wins=" + str(win) + " losses=" + str(los))
+			print(fileName + " numPurchase2= " + str(numPurchase2) + ": %wins=" + str(int(100* float(win2)/float(win2+los2))) + " wins=" + str(win2) + " losses=" + str(los2))
+			print
 		else:
 			print("read_4xfile failed")

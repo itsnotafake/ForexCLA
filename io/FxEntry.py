@@ -10,8 +10,10 @@ class FxEntry:
 	#  False - the closing price went down at the end of 10 minutes
 	#  None  - not yet calculated or can not caluclate (to close to end of file)
 	tenMinGain = None
+	sixMinGain = None
 
 	# True  - we are making a call purchase
 	# False - we are making a put purchase
 	# None  - we are making no purchase
-	purchaseCall = None
+	purchaseCall_10min = None
+	purchaseCall_6min = None

@@ -15,4 +15,5 @@ def createHistogram(binarysequence): #this takes in binarysequence
 		else:
 			counter += 1
 
-	print histogram_array
+	#print histogram_array
+	return histogram_array
