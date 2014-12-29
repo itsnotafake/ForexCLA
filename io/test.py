@@ -8,7 +8,7 @@ from score4x import score1_4xdata
 from score4x import score2_4xdata
 from create4x import create_4xdata
 from createHistogram4x import createHistogram
-from readout4x import readout4x
+from writeHistogram4x import writeHistogram4x
 
 
 def print_4xarray(darray):
@@ -29,6 +29,10 @@ if test_read:
 	fileList = ["eur.aud_12.23.2014", "eur.usd_12.23.2014", "gbp.jpy_12.23.2014", "gbp.usd_12.23.2014", "usd.cad_12.23.2014", "usd.jpy_12.23.2014"]
 	#fileList = ["eur.usd_12.23.2014"]
 
+    # create  JavaScript file for display
+	jsFile = open('../Data/hdata.js', 'w')
+	jsFile.write("var hdata = [\n")
+
 	for fileName in fileList:
 		darray = []
 		ok = read_4xfile(fileName, darray)  
@@ -37,8 +41,7 @@ if test_read:
 			find6MinGain_4xdata(darray)
 			#print_4xarray(darray)
 			#print(get_4xBinarySequence(darray))
-			histogram = createHistogram(get_4xBinarySequence(darray))
-
+			
 			numPurchase = purchase1_4xdata(darray)
 			numPurchase2 = purchase2_4xdata(darray)
 
@@ -49,6 +52,10 @@ if test_read:
 			print(fileName + " numPurchase2= " + str(numPurchase2) + ": %wins=" + str(int(100* float(win2)/float(win2+los2))) + " wins=" + str(win2) + " losses=" + str(los2))
 			print
 
-			readout4x(fileName, histogram)
+			histogram = createHistogram(get_4xBinarySequence(darray))
+			writeHistogram4x(jsFile, fileName, histogram)
 		else:
 			print("read_4xfile failed")
+
+	jsFile.write("];")
+	jsFile.close

@@ -1,11 +1,7 @@
 ##
 # @brief Readout a 4x data array.
 
-def readout4x(currencypair,histogram):
-	c_h_pair = [currencypair, histogram]
+def writeHistogram4x(jsFile, currencypair, histogram):
+	c_h_pair = [currencypair, histogram[1:17]]
 	s = str(c_h_pair)
-
-	f = open('hdata.js', 'a')
-	f.write(s)
-	f.close
-
+	jsFile.write("    " + s + ",\n")
