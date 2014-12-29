@@ -8,6 +8,7 @@ from score4x import score1_4xdata
 from score4x import score2_4xdata
 from create4x import create_4xdata
 from createHistogram4x import createHistogram
+from readout4x import readout4x
 
 
 def print_4xarray(darray):
@@ -47,5 +48,7 @@ if test_read:
 			print(fileName + " numPurchase= " + str(numPurchase) + ": %wins=" + str(int(100* float(win)/float(win+los))) + " wins=" + str(win) + " losses=" + str(los))
 			print(fileName + " numPurchase2= " + str(numPurchase2) + ": %wins=" + str(int(100* float(win2)/float(win2+los2))) + " wins=" + str(win2) + " losses=" + str(los2))
 			print
+
+			readout4x(fileName, histogram)
 		else:
 			print("read_4xfile failed")
